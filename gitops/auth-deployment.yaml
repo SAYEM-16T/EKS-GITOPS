@@ -20,7 +20,7 @@ spec:
             - containerPort: 8080
           env:
             - name: MONGO_URI
-              value: "mongodb://admin:S3cureP@ssw0rd123!@mongo-service:27017"
+              value: "mongodb://$(MONGO_ROOT_USERNAME):$(MONGO_ROOT_PASSWORD)@mongo-service:27017"
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
