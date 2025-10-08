@@ -4,9 +4,9 @@ metadata:
   name: mongo-service
   namespace: go-todo
 spec:
-  ports:
-    - port: 27017
-      targetPort: 27017
   clusterIP: None
   selector:
     app: mongo
+  ports:
+    - port: 27017
+      name: mongo
