@@ -4,13 +4,21 @@ metadata:
   name: todo-ingress
   namespace: go-todo
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
-    - host: 13.62.98.230.nip.io  # your EC2 public IP with nip.io
+    - host: todo.ae01525cf151a4d1c88291cf6c51f778-1894612827.ap-south-1.elb.amazonaws.com.nip.io
       http:
         paths:
-          - path: /
+          - path: /api/v1/auth(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: auth-service
+                port:
+                  number: 8080
+          - path: /()(.*)
             pathType: Prefix
             backend:
               service:
