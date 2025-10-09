@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: auth-service
-          image: sayemiit/auth-service:sha-59b0c43
+          image: sayemiit/auth-service:sha-18721b6
           ports:
             - containerPort: 10000   # <-- fixed port
           env:
