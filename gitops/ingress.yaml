@@ -1,3 +1,33 @@
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: todo-ingress
+#   namespace: go-todo
+#   annotations:
+#     kubernetes.io/ingress.class: nginx
+#     nginx.ingress.kubernetes.io/rewrite-target: /$2
+# spec:
+#   rules:
+#     - host: ae01525cf151a4d1c88291cf6c51f778-1894612827.ap-south-1.elb.amazonaws.com
+#       http:
+#         paths:
+#           - path: /api(/|$)(.*)
+#             pathType: ImplementationSpecific    # 🟢 regex path must use this
+#             backend:
+#               service:
+#                 name: auth-service
+#                 port:
+#                   number: 8080
+#           - path: /
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: frontend-service
+#                 port:
+#                   number: 80
+
+
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -5,14 +35,14 @@ metadata:
   namespace: go-todo
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
     - host: ae01525cf151a4d1c88291cf6c51f778-1894612827.ap-south-1.elb.amazonaws.com
       http:
         paths:
-          - path: /api(/|$)(.*)
-            pathType: ImplementationSpecific    # 🟢 regex path must use this
+          - path: /api/v1/(.*)
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: auth-service
