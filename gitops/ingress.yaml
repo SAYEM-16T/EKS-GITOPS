@@ -5,19 +5,21 @@ metadata:
   namespace: go-todo
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
     - host: ae01525cf151a4d1c88291cf6c51f778-1894612827.ap-south-1.elb.amazonaws.com
       http:
         paths:
-          - path: /api/v1/(.*)
-            pathType: ImplementationSpecific
+          # API routes -> auth-service
+          - path: /api(/|$)(.*)
+            pathType: Prefix
             backend:
               service:
                 name: auth-service
                 port:
                   number: 8080
+          # Everything else -> frontend-service
           - path: /
             pathType: Prefix
             backend:
