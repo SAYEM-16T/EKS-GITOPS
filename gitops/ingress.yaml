@@ -11,15 +11,15 @@ spec:
     - host: ae01525cf151a4d1c88291cf6c51f778-1894612827.ap-south-1.elb.amazonaws.com
       http:
         paths:
-          # API routes -> auth-service
-          - path: /api(/|$)(.*)
+          # All /api requests go to auth-service
+          - path: /api
             pathType: Prefix
             backend:
               service:
                 name: auth-service
                 port:
                   number: 8080
-          # Everything else -> frontend-service
+          # Everything else -> frontend
           - path: /
             pathType: Prefix
             backend:
