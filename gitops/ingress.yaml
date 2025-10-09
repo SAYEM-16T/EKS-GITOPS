@@ -6,7 +6,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     # Correct rewrite: keep /api/v1 for auth-service
-    nginx.ingress.kubernetes.io/rewrite-target: /api/v1/$1
+    # nginx.ingress.kubernetes.io/rewrite-target: /api/v1/$1
 spec:
   rules:
     - host: ae01525cf151a4d1c88291cf6c51f778-ap-south-1.elb.amazonaws.com
